@@ -1,0 +1,25 @@
+1.feladat
+{"languages.0":"English", "awards.wins":2}
+{title:1,writers:1,_id:0,directors:1, year:1}
+{year:-1}
+
+2.feladat
+Atlas atlas-pwxmrx-shard-0 [primary] sample_mflix> db.users.find({email:{$regex:"*.com"}},{name:1,email:1,_id:0})
+
+
+3.feladat
+Atlas atlas-pwxmrx-shard-0 [primary] sample_mflix> db.movies.aggregate([$group:{_id:"$rated" , atlag:{$avg: "$runtime"}}}])
+
+
+4. feladat
+MATCH (m:Movie)<-[:ACTED_IN]-(p:Person)
+WHERE m.released>1970 OR m.title CONTAINS "Love"
+RETURN m.title AS `cim`, p.name AS `név`
+ORDER BY m.title DESC
+
+
+
+5.feladat
+MATCH (p:Person)-[ai:ACTED_IN]->(m:Movie)
+WHERE p.born>1980
+RETURN p.name AS`Actor`, p.born AS `BirthYear`, COUNT(m.title) AS `NumMoviesActedIn`
